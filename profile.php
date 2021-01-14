@@ -75,9 +75,7 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <input type="submit" name="saveChanges" value="Save changes" class="btn btn-primary">
-
-                    <input type="submit" name="Exit" value="exit" class="btn btn-light">
+                    <input type="submit" name="saveChanges" value="Save changes" class="btn btn-primary">                    
                 </div>
             </form>
         </div>
@@ -100,31 +98,23 @@
                 <?php
             }
         }
-        var_dump($_FILES);
+        
         if (strlen($_FILES['photo']['name']) > 0) {
             $user->setPhotoLocation(Util::uploadPhoto($_FILES['photo'], $userId, Util::USER_PHOTO));
-            echo 'd';
         }
         
         $password = $_POST['password'];
         if (strlen($password) > 0) {
-            $user->setPassword();
+            $password = sha1($password);
+            $user->setPassword($password);
         }
 
         if ($adminUsers->editUser($user)) {
-            // echo '<script type="text/javascript">alert("Data has been update successfully");window.location = "index.php";</script>';
+            echo '<script type="text/javascript">alert("Data has been update successfully");window.location = "index.php";</script>';
         } else {
             echo "error";
         }
-    }
-    if (isset($_POST['exit'])) { ?>
-        <script type="text/javascript">
-            if (confirm("¿Desea salir sin guardar cambios?")) {
-                window.location = "index.php";
-            }
-        </script>
-        <?php
-    }
+    }    
     ?>
 
     <script>

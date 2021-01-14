@@ -23,15 +23,15 @@
                 '<title></title>' .
                 '</head>'.
                 '<body>'.
-                '<h1>Hi ' . $user->getFirstname() . ' ' . $user->getLastname() . '!</h1>' .
+                '<h1>Hi ' . $user->getFirstname() . ' ' . $user->getLastname() . '!</h1>' .                
+                'You requested a password change.' .
                 '<br><br>' .
-                'You requested a password change' .
-                '<br>' .
-                'We give you this password <b> ' . $password . ' </b> ' .
+                'We give you this password <b> ' . $password . ' </b>.' .
                 '<br><br>' . 
-                'We recommend that you change it immediately' .
+                'We recommend that you change it immediately.' .
                 '<br><br>' .
-                'Regards' .
+                'Regards.' .
+                '<br><br>' .
                 '<a href="http://whatclothesiwore.syss.tech">whatclothesiwore.syss.tech</a>'.
                 '<br><br>' .
                 '</body>' .
@@ -39,9 +39,9 @@
 
     $password = sha1($password);
     $user->setPassword($password);
+    echo  $message;
     if ($adminUsers->editUser($user)) {
         if (mail($to, $subject, $message, $headers)) {
-            echo '<script>alert("We have sent you an email");</script>';
-            header('Location: index.php');
+            echo '<script type="text/javascript">alert("We have sent you an email with the new password."); window.location = "login.php";</script>';            
         }
     }

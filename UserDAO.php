@@ -12,9 +12,6 @@ class UserDAO {
     }
 
     public function addUser(User $user) : bool {
-        echo '<script>alert("firstname: ' . $user->getFirstname() .  '");</script>';
-        echo '<script>alert("firstname: ' . $user->getFirstname() .  '");</script>';
-        echo '<script>alert("firstname: ' . $user->getFirstname() .  '");</script>';        
         return $this->_connection->insert("INSERT INTO user(firstname, lastname, email, password, "
             . "photo_location, root, sex_id, verified) "
             . "VALUES ('" . $user->getFirstname() . "', '"
